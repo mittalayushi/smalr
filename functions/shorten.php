@@ -4,7 +4,7 @@ require_once 'functions.php';
 $insertCustom = false;
 $errors = false;
 
-$shortener= new UrlShortener();
+$shortener= new URLShortener();
 
 if (($_POST['customCheck']=='on')&&(isset($_POST['custom'])))
 {

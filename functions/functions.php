@@ -6,7 +6,7 @@ class URLShortener
 
 	public function __construct()
 	{
-		$this->db = new mysqli("localhost","my_user","my_password","urlBank");
+		$this->db = new mysqli("localhost","root","","smalr");
 		if($this->db->connect_errno)
 		{
 			header(("Error: 404"));
@@ -62,7 +62,7 @@ class URLShortener
 	 public function existsURL($short)
     {
         $short = $this->db->real_escape_string(strip_tags(addslashes($short)));
-        $rows = $this->db->query("SELECT url FROM link WHERE code = '{$short}' LIMIT 1");
+        $rows = $this->db->query("SELECT url FROM urlBank WHERE shortcode = '{$short}' LIMIT 1");
         return $rows->num_rows > 0;
     }
 }
