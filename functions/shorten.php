@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'functions.php';
+require_once 'function.php';
 $insertCustom = false;
 $errors = false;
 
@@ -37,13 +37,14 @@ if(isset($_POST['url'])&&!$errors)
 	}
 	else
 	{
-		if($shortener->returnShortCodeCustom($url,$custom))
+		$customCode = $_POST['custom'];
+		if($shortener->returnShortCodeCustom($url,$customCode))
 		{
-			$_SESSION['success']=generateURL($custom);
+			$_SESSION['success']=generateURL($customCode);
 		}
 		else
 		{
-			header("Error 404");
+			header("Location: ../index.php?error=inurl");
 			die();
 		}
 	}
@@ -53,5 +54,5 @@ function generateURL($urlSuffix='')
 {
 	return "<a href='http://localhost/{$urlSuffix}'>http://localhost/{$urlSuffix}</a>";
 }
-
+header("Location: ../index.php");
 
