@@ -67,4 +67,16 @@ class URLShortener
         $rows = $this->db->query("SELECT url FROM urlbank WHERE shortcode = '{$short}' LIMIT 1");
         return $rows->num_rows > 0;
     }
+
+    public function getUrl($string){
+    	$string = $this->db->real_escape_string(strip_tags(addslashes($string)));
+    	$rows = $this->db->query("SELECT url FROM urlbank WHERE shortcode = '{$string}'");
+    	if($rows->num_rows){
+    		return $rows->fetch_object()->url;
+    	} else{
+    		header("Location: index.php?error=dnp");
+    		die();
+    	}
+
+    }
 }
