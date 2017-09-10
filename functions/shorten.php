@@ -6,7 +6,7 @@ $errors = false;
 
 $shortener= new URLShortener();
 
-if (($_POST['customCheck']=='on')&&(isset($_POST['custom'])))
+if (($_POST['customcheck']=='on')&&(isset($_POST['custom'])))
 {
 	$custom=$_POST['custom'];
 
@@ -52,7 +52,7 @@ if(isset($_POST['url'])&&!$errors)
 
 function generateURL($urlSuffix='')
 {
-	return "<a href='http://localhost/{$urlSuffix}'>http://localhost/{$urlSuffix}</a>";
+	return "<a href='http://localhost/smalr/{$urlSuffix}'>http://localhost/smalr/{$urlSuffix}</a>";
 }
 header("Location: ../index.php");
 

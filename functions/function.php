@@ -9,7 +9,7 @@ class URLShortener
 		$this->db = new mysqli("localhost","root","","smalr");
 		if($this->db->connect_errno)
 		{
-			header(("Error: 404"));
+			header("Location: ../index.php?error=db");
 			die();
 		}
 	}
@@ -39,7 +39,7 @@ class URLShortener
 			else
 			{
 				$insert=$this->db->query("INSERT INTO urlbank (url,time_stamp) VALUES ('{$url}',NOW())");
-				$fetch=$this->db->query("SELECT * FROM link WHERE url='{$url}'");
+				$fetch=$this->db->query("SELECT * FROM urlbank WHERE url='{$url}'");
 				$get_id = $fetch->fetch_object()->id;
 				$secret = generateCode($get_id);
 
@@ -55,7 +55,7 @@ class URLShortener
 		$custom = trim($custom);
 		$url=$this->db->real_escape_string($url);
 		if(filter_var($url,FILTER_VALIDATE_URL)){
-			$insert=$this->db->query("INSERT INTO urlbank(url,code,created) VALUES ('{$url}','{$custom}',NOW())");
+			$insert=$this->db->query("INSERT INTO urlbank(url,shortcode,created) VALUES ('{$url}','{$custom}',NOW())");
 			return true;
 		}
 		return false;
